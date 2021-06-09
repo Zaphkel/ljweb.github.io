@@ -1,65 +1,126 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title></title>
-</head>
-<body>
-<table>
-<tr>
-<td><input type="button" value="add"   onclick="setOp(' ', 'add');"/></td>
-<td><input type="button" value="miner" onclick="setOp('-', 'miner');"/></td>
-<td><input type="button" value="times" onclick="setOp('*', 'times');"/></td>
-<td><input type="button" value="divide" onclick="setOp('/', 'divide');"/></td>
-</tr>
-</table>
-<table id="tb_calc" style="display:none;">
-<tr>
-<td> <input id="x" type="text" style="width:100px" value="" name="x" /></td>
-<td> <lable id="op" name="op"></lable> </td>
-<td> <input id="y" type="text" style="width:100px" value="" name="y" /> </td>
-<td> <input id="opTips" type="button" value="" onclick="calc();"/> </td>
-<td> <lable id="z" name="z"></lable> </td>
-</tr>
-</table>
-<script type="application/javascript">
-function setOp(op, opTips)
-{
-var tb=document.getElementById("tb_calc");
-tb.style.display = "none";
-document.getElementById("x").value = ""; 
-document.getElementById("y").value = ""; 
-document.getElementById("z").innerText = ""; 
-document.getElementById("op").innerText = op;
-document.getElementById("opTips").value = opTips;
-tb.style.display = "block";
-}
-function calc()
-{
-var x = parseInt(document.getElementById("x").value); 
-var y = parseInt(document.getElementById("y").value);
-var op = document.getElementById("op").innerText;
-var z = "";
-switch(op)
-{
-case ' ':
-z = x   y;
-break;
-case '-':
-z = x - y;
-break;
-case '*': ;
-z = x * y;
-break;
-case '/': ;
-z = x / y;
-break;
-default:
-z = '';
-}
-console.log(x, op, y, '=', z);
-document.getElementById("z").innerText = z;
-}
-</script>
-</body>
-</html>
+ <!-------JavaScript收集區 計算機_開始-------->
+<script language="JavaScript"> 
+<!-- hide script from old browser 
+var answer=0 
+var lastvalue=0 
+var op="+" 
+var lastop="+" 
+var newnumber=true 
+ 
+function input(digit){ 
+if (op==" = ") 
+clearall() 
+if ((!newnumber)&&(document.calc.result.value!="0")) 
+document.calc.result.value+=eval(digit) 
+else 
+document.calc.result.value=""+eval(digit) 
+newnumber=false 
+} 
+ 
+function clearnow(){ 
+document.calc.result.value="_" 
+newnumber=true 
+} 
+ 
+function clearall(){ 
+answer=0 
+lastop="+" 
+op="+" 
+clearnow() 
+} 
+ 
+function operate(operation){ 
+if ((newnumber!=true)||(op==" = ")) 
+{ 
+answer=""+answer 
+if ((operation!=" = ") && (op!=" = ")) 
+{ 
+lastvalue=document.calc.result.value 
+lastop=op 
+answer=eval(answer+lastop+lastvalue) 
+document.calc.result.value=answer 
+} 
+else if (operation==" = ") 
+{ 
+if (op!=" = ") 
+{ 
+lastop=op 
+lastvalue=document.calc.result.value 
+} 
+answer=eval(answer+lastop+lastvalue) 
+document.calc.result.value=answer 
+} 
+newnumber=true 
+} 
+op=operation 
+} 
+ 
+function change(){ 
+answer=-1*document.calc.result.value 
+document.calc.result.value=answer 
+} 
+ 
+function point(){ 
+if (!newnumber) 
+{ 
+number=document.calc.result.value 
+if (number.indexOf('.')==-1) 
+document.calc.result.value+="." 
+}  
+} 
+// end hiding --> 
+</script> 
+<hr width="80%" size="3" color="#FF00FF"> 
+<form name="calc"> 
+  <div align="center"> 
+    <center> 
+    <table border="1" bordercolor="#808000" cellpadding="0"> 
+      <tr> 
+        <td colspan="5"><input type="text" size="14" name="result" value="_" onFocus="blur()">
+      <tr> 
+        <td>
+        <input type="button" name="1" value=" 1 " onClick="input(this.value)">
+        <td>
+        <input type="button" name="2" value=" 2 " onClick="input(this.value)">
+        <td>
+        <input type="button" name="3" value=" 3 " onClick="input(this.value)">
+        <td>
+        <input type="button" name="CE" value=" CE " onClick="clearall()">
+        <td>
+        <input type="button" name="C" value=" C " onClick="clearnow()">
+      <tr> 
+        <td>
+        <input type="button" name="4" value=" 4 " onClick="input(this.value)">
+        <td>
+        <input type="button" name="5" value=" 5 " onClick="input(this.value)">
+        <td>
+        <input type="button" name="6" value=" 6 " onClick="input(this.value)">
+        <td>
+        <input type="button" name="sing" value=" +/- " onClick="change()">
+        <td>
+        <input type="button" name="=" value=" = " onClick="operate(this.value)">
+      <tr> 
+        <td>
+        <input type="button" name="7" value=" 7 " onClick="input(this.value)">
+        <td>
+        <input type="button" name="8" value=" 8 " onClick="input(this.value)">
+        <td>
+        <input type="button" name="9" value=" 9 " onClick="input(this.value)">
+        <td>
+        <input type="button" name="+" value=" + " onClick="operate(this.value)">
+        <td>
+        <input type="button" name="-" value=" - " onClick="operate(this.value)"><tr> 
+        <td colspan="2">
+        <input type="button" name="0" value=" 0 " onClick="input(this.value)">
+        <td>
+        <input type="button" name="." value=" . " onClick="point()">
+        <td>
+        <input type="button" name="*" value=" * " onClick="operate(this.value)">
+        <td>
+        <input type="button" name="/" value=" / " onClick="operate(this.value)">
+    </center> 
+</form> 
+<hr width="80%" size="3" noshade color="#FF00FF"> 
+           <!-------JavaScript收集區 計算機_結束--------><br>         
+  <input onClick="javascript:this.form.txt.focus();this.form.txt.select();" type="button" value="全選"></p>
+</body></html>           
